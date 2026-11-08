@@ -33,7 +33,14 @@
     "measured": "2026-11-08",
     "repeats": 7,
     "warmup_excluded": 1,
-    "notes": "Different function from the merged compute_ka_ks change in ClawBio/ClawBio#734. No open PR touches compute_k. Seven fresh processes after one warmup; the checksum was the same on every run. A scratch NumPy Hamming count on these same prepared windows returned that checksum. Its in-process median over 7 repeats was 6.50 ms, spread 4.23%."
+    "notes": "Different function from the merged compute_ka_ks change in ClawBio/ClawBio#734. No open PR touches compute_k. Seven fresh processes after one warmup; the checksum was the same on every run. A scratch NumPy Hamming count on these same prepared windows returned that checksum. Its in-process median over 7 repeats was 6.50 ms, spread 4.23%.",
+    "upstream_repo": "https://github.com/ClawBio/ClawBio",
+    "head_sha": "fd3fca24624c3811c698df1a26333e11b8c2f5ca",
+    "file": "skills/dnasp/dnasp.py",
+    "function": "compute_k",
+    "native_test_cmd": "python -m pytest skills/dnasp/tests/test_validation5_regressions.py skills/dnasp/tests/test_dnasp.py clawbio/tests/test_parsers.py skills/genome-compare/tests/test_genome_compare.py -q",
+    "metric_kind": "wall",
+    "baseline_median_ms": 83.97946299999148
   },
   {
     "id": "genome-compare-parse-genotype-wall",
@@ -69,7 +76,14 @@
     "measured": "2026-11-08",
     "repeats": 7,
     "warmup_excluded": 1,
-    "notes": "The call builds a GenotypeRecord per SNP and then copies that into the two dicts the skill keeps. A scratch one-pass build of those two dicts compared equal to the current return value and matched this checksum. Five in-process calls had median 0.739 s (samples 0.780, 0.745, 0.727, 0.739, 0.728). That sits below every baseline sample. Gzip read of the same file is about 0.12 s, so the time is the Python objects."
+    "notes": "The call builds a GenotypeRecord per SNP and then copies that into the two dicts the skill keeps. A scratch one-pass build of those two dicts compared equal to the current return value and matched this checksum. Five in-process calls had median 0.739 s (samples 0.780, 0.745, 0.727, 0.739, 0.728). That sits below every baseline sample. Gzip read of the same file is about 0.12 s, so the time is the Python objects.",
+    "upstream_repo": "https://github.com/ClawBio/ClawBio",
+    "head_sha": "fd3fca24624c3811c698df1a26333e11b8c2f5ca",
+    "file": "skills/genome-compare/genome_compare.py",
+    "function": "_parse_genotype_file",
+    "native_test_cmd": "python -m pytest skills/dnasp/tests/test_validation5_regressions.py skills/dnasp/tests/test_dnasp.py clawbio/tests/test_parsers.py skills/genome-compare/tests/test_genome_compare.py -q",
+    "metric_kind": "wall",
+    "baseline_median_ms": 1355.4054219999898
   },
   {
     "id": "genome-compare-parse-genotype-peak-memory",
@@ -106,6 +120,11 @@
     "measured": "2026-11-08",
     "repeats": 7,
     "warmup_excluded": 1,
-    "notes": "Peak is tracemalloc's peak traced bytes, not RSS. All seven processes reported 288356128. The scratch one-pass parse that matched the checksum peaked at 213908239, 213921839, and 213908095 bytes under the same tracing. The retained genotype and position dicts are the result; the extra peak is the GenotypeRecord map that the function discards."
+    "notes": "Peak is tracemalloc's peak traced bytes, not RSS. All seven processes reported 288356128. The scratch one-pass parse that matched the checksum peaked at 213908239, 213921839, and 213908095 bytes under the same tracing. The retained genotype and position dicts are the result; the extra peak is the GenotypeRecord map that the function discards.",
+    "upstream_repo": "https://github.com/ClawBio/ClawBio",
+    "head_sha": "fd3fca24624c3811c698df1a26333e11b8c2f5ca",
+    "file": "skills/genome-compare/genome_compare.py",
+    "function": "_parse_genotype_file",
+    "native_test_cmd": "python -m pytest skills/dnasp/tests/test_validation5_regressions.py skills/dnasp/tests/test_dnasp.py clawbio/tests/test_parsers.py skills/genome-compare/tests/test_genome_compare.py -q"
   }
 ]
